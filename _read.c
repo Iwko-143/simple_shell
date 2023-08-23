@@ -2,6 +2,7 @@
 /**
  * read_shell - function to read the input
  * @cmd: input command
+ * @size: size of the input command
  * Return: nothing
  */
 void read_shell(char *cmd, size_t size)

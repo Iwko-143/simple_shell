@@ -2,14 +2,14 @@
 /**
  * shell_execute - a function to execute command
  * @cmd: command  to be executed
+ * @args: array of arguments
  * Return: nothing
  */
-void shell_execute(const char *cmd)
+void shell_execute(const char *cmd, char *args[])
 {
 	pid_t process_id = fork();
 	int i = 0;
 	char *token;
-	char *args[128];
 
 	if (process_id == -1)
 	{
