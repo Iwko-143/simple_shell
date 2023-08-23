@@ -1,15 +1,16 @@
 #include "shell.h"
+
 /**
- * shell_execute - a function to execute command
- * @cmd: command  to be executed
- * @args: array of arguments
+ * shell_execute_tokenize - a function to execute command
+ * @cmd: command to execute
  * Return: nothing
  */
-void shell_execute(const char *cmd, char *args[])
+void shell_execute_tokenize(const char *cmd)
 {
 	pid_t process_id = fork();
 	int i = 0;
 	char *token;
+	char *args[128];
 
 	if (process_id == -1)
 	{
@@ -26,7 +27,6 @@ void shell_execute(const char *cmd, char *args[])
 		}
 		args[i] = NULL;
 		execvp(args[0], args);
-
 		shell_print("Error executing command.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -35,3 +35,4 @@ void shell_execute(const char *cmd, char *args[])
 		wait(NULL);
 	}
 }
+

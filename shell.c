@@ -1,23 +1,34 @@
 #include "shell.h"
-
 /**
  * main - input
- * Return: always 0
+ *  Return: always 0
  */
 int main(void)
 {
-	char cmd[MAX_COMMAND_LENGTH];
-	char *args[MAX_ARGS + 1];
+	char cmd[128];
+	char **en = environ;
 
 	while (1)
 	{
 		shell_display();
 		read_shell(cmd, sizeof(cmd));
-		if (strcmp(args[0], "exit") == 0)
+
+		if (strcmp(cmd, "exit") == 0)
 		{
 			exit(0);
 		}
-		shell_execute(cmd, args);
+		else if (strcmp(cmd, "env") == 0)
+		{
+			while (*en)
+			{
+				shell_print(*en);
+				en++;
+			}
+		}
+		else
+		{
+			shell_execute_tokenize(cmd);
+		}
 	}
 	return (0);
 }
